@@ -502,7 +502,9 @@
         y2 (aget data 3)
         x-pos-dir? (<= x1 x2)
         y-pos-dir? (<= y1 y2)
-        [^double x-eps ^double y-eps] (xy-shifts eps slope) ; x-eps, y-eps always >= 0
+        xy-eps (xy-shifts eps slope) ; x-eps, y-eps always >= 0
+        x-eps (double (xy-eps 0))
+        y-eps (double (xy-eps 1))
         x-shift (if x-pos-dir? x-eps (- x-eps))             ; correct their directions
         y-shift (if y-pos-dir? y-eps (- y-eps))
         look-fn (->ddo-fn look-fn)

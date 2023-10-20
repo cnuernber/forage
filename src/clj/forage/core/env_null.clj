@@ -3,11 +3,11 @@
 
 (defn constant-failure-look-fn
   "A look-fn that never finds a foodspot."
-  [x y]
+  [^double x ^double y]
   false)
 
 (defn create-repeated-success-look-fn
-  "Use this e.g. with partial to create a look-fn that \"finds\" 
+  "Use this e.g. with partial to create a look-fn that \"finds\"
   a foodspot--i.e. returns truthy--every n calls.  Example:
      (def look-fn (partial regular-success-look-fn-fn 1000))
   The resulting function takes two arguments, x and y coordinates,

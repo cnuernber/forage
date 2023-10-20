@@ -28,7 +28,7 @@
                  [cljplot "0.0.2a-SNAPSHOT"]
                  ;[clojure2d "1.4.4"] ; not required for cljplot, but allows additional choices
                  ;[metasoarous/darkstar "0.1.0"] ; require as applied-science.darkstar (fork of original applied-science/darkstar, which isn't on Clojars)
-                 [mason "21"]
+                 ;; [mason "21"]
                 ]
 
   :source-paths ["src/clj"]
@@ -43,7 +43,7 @@
   :profiles {:fullmason {:dependencies [[org.clojure/tools.cli "1.0.206"] ; command line processing
                                         [mars0i/masonclj "0.2.0"]
                                         [org.beanshell/bsh "2.0b4"]
-                                        [com.lowagie/itext "1.2.3"] ; version that comes with MASON. Not in maven.org: [com.lowagie/itext "1.2"] 
+                                        [com.lowagie/itext "1.2.3"] ; version that comes with MASON. Not in maven.org: [com.lowagie/itext "1.2"]
                                         [org.jfree/jcommon "1.0.21"]
                                         [org.jfree/jfreechart "1.0.17"]
                                         [javax.media/jmf "2.1.1e"]]
@@ -54,7 +54,7 @@
                                forage.mason.core]}
 
 
-             ;; -Xss specifies per-thread max stack size.  If you set it too 
+             ;; -Xss specifies per-thread max stack size.  If you set it too
              ;; small (< 144K) or too large (> 1G), java won't run.
 
              ;; Usage tip: lein with-profile +production
@@ -82,7 +82,7 @@
                                      "-XX:+DebugNonSafepoints"]}}     ; for clj-async-profiler
 
   ;; TO INSTALL A NON-MAVENIZED JAR LOCALLY, uncomment lein-localrepo
-  ;; below, run 
+  ;; below, run
   ;;    lein localrepo install <jarfilename> <libname> <version num>'
   ;:plugins [[lein-localrepo "0.5.3"]
   ;          [lein-expand-resource-paths "0.0.1"]] ; allows wildcards in resource-paths (https://github.com/dchelimsky/lein-expand-resource-paths)

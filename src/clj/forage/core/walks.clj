@@ -7,6 +7,7 @@
               [utils.random :as r]
               [fastmath.core :as fm]
               [clojure.core :as cc] ; for cc/<, cc/> (in find-in-seg), and cc/+ (with reduce).
+              [ham-fisted.api :as hamf]
 
 )
     (:import [clojure.lang IFn$DDO]))
@@ -487,14 +488,18 @@
   function will be used.)  If no foodspots are found by the time [x2 y2]
   is checked, this function returns nil."
   [look-fn eps [x1 y1] [x2 y2]]
-  (let [^double slope (m/slope-from-coords [x1 y1] [x2 y2])
+  (let [slope (m/slope-from-coords x1 y1 x2 y2)
         steep (or (infinite? slope)
                   (> (abs slope) (double steep-slope-inf)))
         slope (if steep (/ slope) slope)
         look-fn (if steep (swap-args-fn look-fn) look-fn)
-        [[^double x1 ^double y1] [^double x2 ^double y2]] (if steep
-                                                            [[y1 x1] [y2 x2]] ; swap x and y
-                                                            [[x1 y1] [x2 y2]]) ; make no change
+        ^doubles data (if steep
+                        (hamf/double-array [y1 x1 y2 x2]) ; swap x and y
+                        (hamf/double-array [x1 y1 x2 y2])) ; make no change
+        x1 (aget data 0)
+        y1 (aget data 1)
+        x2 (aget data 2)
+        y2 (aget data 3)
         x-pos-dir? (<= x1 x2)
         y-pos-dir? (<= y1 y2)
         [^double x-eps ^double y-eps] (xy-shifts eps slope) ; x-eps, y-eps always >= 0
